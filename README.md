@@ -1,6 +1,6 @@
 # fish-atlas-sdk
 
-This is an example library that was created for demo purpose
+This is an example library that was created for the demo purpose of article https://blog.oleksiipopov.com/2023/03/09/feature-branches-approach-in-ci-cd-of-npm-libraries/
 
 ## Pre-requisites
 
