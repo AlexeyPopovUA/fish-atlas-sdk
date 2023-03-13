@@ -1,0 +1,18 @@
+name: Prepare source name environment variable
+description: 'Prepare source name environment variable'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare source name environment variable (CLEAN_SOURCE_NAME)
+      shell: bash
+      run: |
+        if [ $GITHUB_EVENT_NAME == 'delete' ]
+        then
+          SOURCE=${{ github.event.ref }}
+        else
+          SOURCE=${{ github.ref_name }}
+        fi
+        # take first 40 chars from the string
+        SOURCE=${SOURCE:0:40}
+        echo CLEAN_SOURCE_NAME=$(echo "$SOURCE" | sed -r 's/[/.@_]+/-/g' | awk '{print tolower($1)}') >> $GITHUB_ENV

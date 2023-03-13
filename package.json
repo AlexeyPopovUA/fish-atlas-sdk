@@ -23,7 +23,8 @@
     "url": "https://github.com/AlexeyPopovUA/fish-atlas-sdk/issues"
   },
   "homepage": "https://github.com/AlexeyPopovUA/fish-atlas-sdk#readme",
-  "dependencies": {
-    "@types/node": "^18.15.1"
+  "devDependencies": {
+    "@types/node": "^18.15.1",
+    "standard-version": "^9.5.0"
   }
 }

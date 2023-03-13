@@ -1,0 +1,30 @@
+name: Publish alias to npm
+description: 'Publish an alias to a npm repository'
+
+inputs:
+  alias-name:
+    description: 'Name of the alias that is to be pushed, cleaned by removing illegal tokens: [/.@_] and in lower case'
+    required: true
+  npm-repo-name:
+    description: 'Name of the npm repository to be pushed to'
+    required: true
+  release:
+    description: 'True if alias is actually a normal release, otherwise false'
+    required: false
+    default: 'false'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Publish alias to npm
+      shell: bash
+      run: |
+        npm dist-tag ls ${{ inputs.npm-repo-name }}
+        if [ ${{ inputs.release }} == 'true' ]
+        then
+          npm publish
+        else
+          npx standard-version --prerelease ${{ inputs.alias-name }}
+          npm publish --tag=${{ inputs.alias-name }}
+        fi
+        npm dist-tag ls ${{ inputs.npm-repo-name }}

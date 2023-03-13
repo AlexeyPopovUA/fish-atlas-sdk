@@ -1,0 +1,17 @@
+name: Delete alias from npm
+description: 'Delete alias from npm'
+
+inputs:
+  alias-name:
+    description: 'Name of the alias to be deleted'
+    required: true
+  npm-repo-name:
+    description: 'Name of the npm repository the to be deleted alias is stored on'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Remove alias
+      shell: bash
+      run: npm dist-tag rm ${{ inputs.npm-repo-name }} ${{ inputs.alias-name }}

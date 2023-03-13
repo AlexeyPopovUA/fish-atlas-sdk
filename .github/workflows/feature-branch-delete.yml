@@ -1,0 +1,28 @@
+name: Feature branch delete
+
+on:
+  delete:
+    branches:
+      - '**'
+
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+jobs:
+  delete-npm-alias:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Prepare environment (variables, git, node)
+        uses: ./.github/workflows/prepare-environment
+        with:
+          npm-token: ${{ env.NPM_TOKEN }}
+
+      - name: Remove branch package
+        uses: ./.github/workflows/delete-alias-from-npm
+        with:
+          alias-name: ${{ env.CLEAN_SOURCE_NAME }}
+          npm-repo-name: ${{ github.event.repository.name }}

@@ -1,0 +1,30 @@
+name: Prepare NPM environment
+description: 'Cleans the source name, prepares node environment, git and NPM'
+inputs:
+  npm-token:
+    description: 'npm token'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Prepare variables
+      uses: ./.github/workflows/prepare-source-name
+
+    - name: Install runtime
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Configure Git user
+      shell: bash
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+    - name: Authenticate in the NPM repository
+      shell: bash
+      run: |
+        npm config set registry=https://registry.npmjs.org/
+        npm config set //registry.npmjs.org/:_authToken=${{ inputs.npm-token }}

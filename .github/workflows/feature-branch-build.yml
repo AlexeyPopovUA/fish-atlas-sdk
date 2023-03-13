@@ -1,0 +1,39 @@
+name: Feature branch build
+
+on:
+  push:
+    branches:
+      - '**'
+
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+jobs:
+  build-and-publish-npm-alias:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Prepare environment (variables, git, node, npm auth)
+        uses: ./.github/workflows/prepare-environment
+        with:
+          npm-token: ${{ env.NPM_TOKEN }}
+
+      - name: Install
+        run: npm ci
+
+      - name: Unit tests
+        run: npm run test
+
+      - name: Switch version
+        run: |
+          /bin/bash ./scripts/switch-version.sh ${{ github.event.repository.name }} ${{ env.CLEAN_SOURCE_NAME }}
+          echo "RESOLVED_ALIAS=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+
+      - name: Publish branch
+        uses: ./.github/workflows/publish-alias-to-npm
+        with:
+          alias-name: ${{ env.CLEAN_SOURCE_NAME }}
+          npm-repo-name: ${{ github.event.repository.name }}
