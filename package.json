@@ -4,7 +4,9 @@
   "description": "Fish atlas SDK. This is an example library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Tests\""
+    "test": "echo \"Tests\"",
+    "release:test": "npx standard-version --dry-run",
+    "release": "if [ \"$(git rev-parse --abbrev-ref HEAD)\" == \"main\" ]; then npx standard-version --commit-all && git push --follow-tags origin main; else echo \"Release is only allowed from the main branch\"; fi"
   },
   "repository": {
     "type": "git",
