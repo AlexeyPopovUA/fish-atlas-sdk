@@ -1,6 +1,6 @@
 {
   "name": "fish-atlas-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fish atlas SDK. This is an example library",
   "main": "index.js",
   "scripts": {
