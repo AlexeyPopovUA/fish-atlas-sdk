@@ -1,0 +1,29 @@
+{
+  "name": "fish-atlas-sdk",
+  "version": "1.0.0",
+  "description": "Fish atlas SDK. This is an example library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Tests\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/AlexeyPopovUA/fish-atlas-sdk.git"
+  },
+  "keywords": [
+    "fish-atlas",
+    "sdk",
+    "example",
+    "demo",
+    "feature-branches"
+  ],
+  "author": "Oleksii Popov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexeyPopovUA/fish-atlas-sdk/issues"
+  },
+  "homepage": "https://github.com/AlexeyPopovUA/fish-atlas-sdk#readme",
+  "dependencies": {
+    "@types/node": "^18.15.1"
+  }
+}
